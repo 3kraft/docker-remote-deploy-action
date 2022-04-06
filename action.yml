@@ -6,9 +6,17 @@ inputs:
   docker-host:
     description: a remote docker host (ssh) (127.0.0.1)
     required: true
+  docker-host-user:
+    description: a user on to connect the remote docker host (root)
+    required: true
+    default: root
   private-key:
     description: private rsa key for the ssh connection to the remote host (-----BEGIN RSA PRIVATE KEY----- ....)
     required: true
+  registry:
+    description: a docker registry user (ghcr.io)
+    required: true
+    default: ghcr.io
   registry-user:
     description: a docker registry user (dummy)
     required: true
@@ -45,6 +53,8 @@ runs:
       env:
         PRIVATE_KEY_FILE: 'id_rsa'
         DOCKER_HOST: ${{ inputs.docker-host }}
+        DOCKER_HOST_USER: ${{ inputs.docker-host-user }}
+        REGISTRY: ${{ inputs.registry }}
         REGISTRY_USER: ${{ inputs.registry-user }}
         REGISTRY_TOKEN: ${{ inputs.registry-token }}
         CONTAINER_NAME: ${{ inputs.container-name }}
