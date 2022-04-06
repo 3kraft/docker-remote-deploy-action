@@ -1,0 +1,57 @@
+name: Remote Docker Redploy
+description: Deploys to remote docker host from a docker registry
+inputs:
+  docker-host:
+    description: a remote docker host (ssh) (127.0.0.1)
+    required: true
+  private-key:
+    description: private rsa key for the ssh connection to the remote host (-----BEGIN RSA PRIVATE KEY----- ....)
+    required: true
+  registry-user:
+    description: a docker registry user (dummy)
+    required: true
+  registry-token:
+    description: an auth token/pwd for the registry (***)
+    required: true
+  container-name:
+    description: name of the container to start (example-container)
+    required: true
+  container-ports:
+    description: exposed ports of the container (8080:8080)
+    required: true
+  image-name:
+    description: docker image name (example-image)
+    required: true
+  tag-name:
+    description: image tag (latest)
+    required: true
+  container-args:
+    description: additional run args (-d -e XXX=xxx  --restart unless-stopped)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Copy pub key to file
+      run: 'echo "${{ inputs.private-key }}" > $PRIVATE_KEY_FILE && chmod 600 $PRIVATE_KEY_FILE'
+      shell: bash
+      env:
+        PRIVATE_KEY_FILE: 'id_rsa'
+    - name: Run docker deployment
+      run: docker-remote-deploy.sh
+      shell: bash
+      env:
+        PRIVATE_KEY_FILE: 'id_rsa'
+        DOCKER_HOST: ${{ inputs.docker-host }}
+        REGISTRY_USER: ${{ inputs.registry-user }}
+        REGISTRY_TOKEN: ${{ inputs.registry-token }}
+        CONTAINER_NAME: ${{ inputs.container-name }}
+        CONTAINER_PORTS: ${{ inputs.container-ports }}
+        CONTAINER_ARGS: ${{ inputs.container-args }}
+        IMAGE_NAME: ${{ inputs.image-name }}
+        TAG_NAME: ${{ inputs.tag-name }}
+
+branding:
+  icon: 'droplet'  
+  color: 'purple'
+  
