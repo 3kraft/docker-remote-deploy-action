@@ -1,5 +1,7 @@
 name: Remote Docker Redploy
+
 description: Deploys to remote docker host from a docker registry
+
 inputs:
   docker-host:
     description: a remote docker host (ssh) (127.0.0.1)
@@ -38,7 +40,7 @@ runs:
       env:
         PRIVATE_KEY_FILE: 'id_rsa'
     - name: Run docker deployment
-      run: docker-remote-deploy.sh
+      run: ${{ github.action_path }}/docker-remote-deploy.sh
       shell: bash
       env:
         PRIVATE_KEY_FILE: 'id_rsa'
@@ -54,4 +56,3 @@ runs:
 branding:
   icon: 'droplet'  
   color: 'purple'
-  
