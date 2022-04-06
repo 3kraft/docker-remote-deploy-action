@@ -4,7 +4,7 @@ A simple composition github action to deploy an image to a remote docker engine 
 
 # Usage
 
-See [action.yml](../main/action.yml)
+See [action.yml](action.yml)
 
 ## Deploy/Run an image from ghcr.io Docker registry on a remote host
 
@@ -28,4 +28,8 @@ redeploy-job:
         tag-name: ${{ github.ref_name }}
         container-args: '-d -e SPRING_PROFILES_ACTIVE=prod --restart unless-stopped'
 ```
+
+# License
+
+This project is licensed under the terms of the [MIT license](LICENSE).
 
