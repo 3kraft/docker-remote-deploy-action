@@ -14,9 +14,7 @@ inputs:
     description: private rsa key for the ssh connection to the remote host (-----BEGIN RSA PRIVATE KEY----- ....)
     required: true
   registry:
-    description: a docker registry user (ghcr.io)
-    required: true
-    default: ghcr.io
+    description: a docker registry server (ghcr.io). Do not set the registry property, when using default "hub.docker.com" registry, otherwise docker login will fail.
   registry-user:
     description: a docker registry user (dummy)
     required: true
