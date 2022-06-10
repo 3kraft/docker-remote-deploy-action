@@ -35,8 +35,12 @@ inputs:
     required: true
   container-args:
     description: additional run args (-d -e XXX=xxx  --restart unless-stopped)
-    required: true
-
+    required: false
+  environment-name:
+    description: enironment name, if applicable (staging)
+    required: false
+    default: development
+    
 runs:
   using: composite
   steps:
@@ -60,6 +64,9 @@ runs:
         CONTAINER_ARGS: ${{ inputs.container-args }}
         IMAGE_NAME: ${{ inputs.image-name }}
         TAG_NAME: ${{ inputs.tag-name }}
+        DD_ENV: ${{ inputs.environment-name }}
+        DD_SERVICE: ${{ inputs.container-name }}
+        DD_VERSION: ${{ inputs.tag-name }}
 
 branding:
   icon: 'droplet'  
