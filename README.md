@@ -1,4 +1,4 @@
-# docker-remote-deploy-action v1.1
+# docker-remote-deploy-action v1.2
 
 A simple composition github action to deploy an image to a remote docker engine using ssh.
 
@@ -27,6 +27,7 @@ redeploy-job:
         image-name: 'ghcr.io/${{ github.repository }}'
         tag-name: ${{ github.ref_name }}
         container-args: '-d -e SPRING_PROFILES_ACTIVE=prod --restart unless-stopped'
+        environment-name: 'development'
 ```
 
 # License
