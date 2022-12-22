@@ -40,6 +40,9 @@ inputs:
     description: enironment name, if applicable (staging)
     required: false
     default: development
+  network:
+    description: an optional docker network name
+    required: false
     
 runs:
   using: composite
@@ -67,6 +70,7 @@ runs:
         DD_ENV: ${{ inputs.environment-name }}
         DD_SERVICE: ${{ inputs.container-name }}
         DD_VERSION: ${{ inputs.tag-name }}
+        NETWORK: ${{ inputs.network }}
 
 branding:
   icon: 'droplet'  

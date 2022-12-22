@@ -1,4 +1,4 @@
-# docker-remote-deploy-action v1.2
+# docker-remote-deploy-action v1.3
 
 A simple composition github action to deploy an image to a remote docker engine using ssh.
 
@@ -14,7 +14,7 @@ redeploy-job:
   runs-on: ubuntu-latest
   steps:
     - name: Run docker deployment
-      uses: 3kraft/docker-remote-deploy-action@v1.1
+      uses: 3kraft/docker-remote-deploy-action@v1.3
       with:
         docker-host: '192.168.0.1'
         docker-host-user: root
@@ -28,6 +28,7 @@ redeploy-job:
         tag-name: ${{ github.ref_name }}
         container-args: '-d -e SPRING_PROFILES_ACTIVE=prod --restart unless-stopped'
         environment-name: 'development'
+        network: example-net
 ```
 
 # License
