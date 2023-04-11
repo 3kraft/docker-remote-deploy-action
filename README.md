@@ -1,4 +1,4 @@
-# docker-remote-deploy-action v1.3
+# docker-remote-deploy-action v1.4
 
 A simple composition github action to deploy an image to a remote docker engine using ssh.
 
@@ -14,7 +14,7 @@ redeploy-job:
   runs-on: ubuntu-latest
   steps:
     - name: Run docker deployment
-      uses: 3kraft/docker-remote-deploy-action@v1.3
+      uses: 3kraft/docker-remote-deploy-action@v1.4
       with:
         docker-host: '192.168.0.1'
         docker-host-user: root
